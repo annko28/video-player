@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+});
+
+function renderPlaylist() {
+
+  playlistEl.innerHTML = '';
+
+  playlist.forEach((file, index) => {
+
+    const item = document.createElement('div');
+
+    item.className = 'item';
+
+    if (index === currentIndex) {
+      item.classList.add('active');
+    }
+
+    item.textContent = file.name;
+
+    item.onclick = () => {
+      currentIndex = index;
+      playVideo(currentIndex);
+    };
+
+    playlistEl.appendChild(item);
+  });
+}
+
+shuffleBtn.addEventListener('click', () => {
+
+  shuffle = !shuffle;
+
+  shuffleBtn.textContent = shuffle
+    ? 'シャッフル ON'
+    : 'シャッフル OFF';
+
+  shuffleBtn.classList.toggle('active', shuffle);
+});
+
+loopBtn.addEventListener('click', () => {
+
+  loop = !loop;
+
+  loopBtn.textContent = loop
+    ? 'ループ ON'
+    : 'ループ OFF';
+
+  loopBtn.classList.toggle('active', loop);
+});
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js');
+}
+
+</script>
+
+</body>
+</html>
